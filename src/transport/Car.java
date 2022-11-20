@@ -4,11 +4,21 @@ public class Car extends Transport implements Competing{
 
     private int bestLapTime;
     private int maxSpeed;
+    private TypeOfBody typeOfBody;
 
-    public Car(String brand, String model, double engineVolume, int bestLapTime, int maxSpeed) {
+    public Car(String brand, String model, double engineVolume, int bestLapTime, int maxSpeed, TypeOfBody typeOfBody) {
         super(brand, model, engineVolume);
         this.bestLapTime = Math.max(bestLapTime, 0);
         this.maxSpeed = Math.max(maxSpeed, 0);
+        this.typeOfBody = typeOfBody;
+    }
+
+    public TypeOfBody getTypeOfBody() {
+        return typeOfBody;
+    }
+
+    public void setTypeOfBody(TypeOfBody typeOfBody) {
+        this.typeOfBody = typeOfBody;
     }
 
     @Override
@@ -19,6 +29,15 @@ public class Car extends Transport implements Competing{
     @Override
     public void finishTheMove() {
         System.out.println("Заканчивает движение");
+    }
+
+    @Override
+    public void printType() {
+        if (typeOfBody == null) {
+            System.out.println("Данных по авто недостаточно");
+        } else {
+            System.out.println("Тип кузова авто: " + typeOfBody.getName());
+        }
     }
 
     @Override
@@ -47,7 +66,6 @@ public class Car extends Transport implements Competing{
     public String toString() {
         return "Легковой автомобиль: " + getBrand() +
                 " " + getModel() +
-                "; объем двигателя: " + getEngineVolume() +
-                " л.";
+                "; объем двигателя: " + getEngineVolume();
     }
 }
